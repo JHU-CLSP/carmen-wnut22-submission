@@ -2,14 +2,16 @@
 
 ## Obtaining the data
 
-Due to Twitter's policies, only Tweet IDs, but not the actual content, can be directly released. Thus, we provide the Tweet IDs for the released datasets in the `data/` folder. We refer reader to popular tools such as the Twitter [Hydrator](https://github.com/DocNow/hydrator) to get access to the actual Tweet JSONlines files. Once Tweets are hydrated, please store the JSONlines files in `.gz` compressed format (preferably multiple `.gz` files to enable batch processing).
+Due to Twitter's policies, only tweet IDs, not the actual content, can be directly released. 
+Thus, we provide tweet IDs to those who **request from the authors**. 
+We refer reader to popular tools such as the Twitter [Hydrator](https://github.com/DocNow/hydrator) to get access to the actual Tweet JSONlines files. 
+Once Tweets are hydrated, please store the JSONlines files in `.gz` compressed format (preferably multiple `.gz` files to enable batch processing).
 
 ## Reproducing paper results
 Run the Python scripts in the `evaluation/` folder with the corresponding bash script in the `script/` folder, using different location databases in the `database/` folder
 
 ## Directory contents
 - `carmen` contains the Carmen 2.0 code (based off the original Carmen)
-- `data/` contains Tweet IDs for different released datasets, including different splits of **Twitter-Global**. (Request data from authors)
 - `database/` contains different location database that can be used to initialize Carmen.
     - `locations.json` is the original Carmen location database
     - `geonames_locations_only.json` is the new location database derived from the GeoNames databse
