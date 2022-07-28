@@ -22,4 +22,16 @@ For Carmen front-end:
 
 
 ## Experiments
+Code for experiments is in `experiments`.
+
+The script to evaluate Carmen with different location databases and target datasets is `evaluate_carmen.py`.
+`batch_evaluate_carmen.py` is the same as `evaluate_carmen.py`, but written for a distributed Sun Grid Engine (SGE) setup.
+
+These are the important options:
+    - `--input-file`: JSONlines tweet file of tweets to geolocate
+    - `--location-file`: path to Carmen location database to use
+
+The other scripts are for collecting dataset statistics and to filter datasets for ablations (e.g., by language, year, etc.).
+
+See paper for description of evaluation metrics and results.
 
