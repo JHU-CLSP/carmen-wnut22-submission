@@ -1,37 +1,20 @@
 # Changes in User Geolocation over Time: A Study with Carmen 2.0
 
-Anonymized git repo for W-NUT 2022 submission.
+## Obtaining the data
 
-## Carmen 2.0
+Due to Twitter's policies, only Tweet IDs, but not the actual content, can be directly released. Thus, we provide the Tweet IDs for the released datasets in the `data/` folder. We refer reader to popular tools such as the Twitter [Hydrator](https://github.com/DocNow/hydrator) to get access to the actual Tweet JSONlines files. Once Tweets are hydrated, please store the JSONlines files in `.gz` compressed format (preferably multiple `.gz` files to enable batch processing).
 
-An updated version of Carmen, a library for geolocating tweets.
+## Reproducing paper results
+Run the Python scripts in the `evaluation/` folder with the corresponding bash script in the `script/` folder, using different location databases in the `database/` folder
 
-Given a tweet, Carmen will return `Location` objects that represents a physical location.
-The original version of Carmen used an internal location database, but we update and expand with GeoNames.
-
-Install:
-
-    $ python setup.py install
-
-For Carmen front-end:
-
-    $ python -m carmen.cli --help
-
-
-### Geonames Mapping
-
-
-## Experiments
-Code for experiments is in `experiments`.
-
-The script to evaluate Carmen with different location databases and target datasets is `evaluate_carmen.py`.
-`batch_evaluate_carmen.py` is the same as `evaluate_carmen.py`, but written for a distributed Sun Grid Engine (SGE) setup.
-
-These are the important options:
-    - `--input-file`: JSONlines tweet file of tweets to geolocate
-    - `--location-file`: path to Carmen location database to use
-
-The other scripts are for collecting dataset statistics and to filter datasets for ablations (e.g., by language, year, etc.).
-
-See paper for description of evaluation metrics and results.
-
+## Directory contents
+- `carmen` contains the Carmen 2.0 code (based off the original Carmen)
+- `data/` contains Tweet IDs for different released datasets, including different splits of **Twitter-Global**. (Request data from authors)
+- `database/` contains different location database that can be used to initialize Carmen.
+    - `locations.json` is the original Carmen location database
+    - `geonames_locations_only.json` is the new location database derived from the GeoNames databse
+    - `geonames_locations_combined.json` is the combined version of `locations.json` and `geonames_locations_only.json`, with entries in `locations.json` mapped to a GeoNames entry, and then converted to the Carmen database format
+- `evaluation/` contains main Python scripts that computes the performance of Carmen 2.0 across different datasets
+- `preprocessing/` contains code to filter **Twitter-Global** into different splits. Since we already provided the splitted **Twitter-Global** Tweet IDs, it is likely that user can skip this preprocessing step.
+- `scripts/` contains bash scripts to run all the other Python scripts provided in other folders. Note that these scripts only works on a server with Sun Grid Engine (SGE) queueing system, which is used for efficient batch processing on 100 CPU jobs. User need to adapt the input and output path of these scripts, and also adapt the batch processing part if not using SGE.
+- `utils/` contains useful shortcuts for collecting results, e.g. format results into a csv table.
